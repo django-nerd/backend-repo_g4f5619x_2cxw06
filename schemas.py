@@ -41,8 +41,14 @@ class Product(BaseModel):
 # Add your own schemas here:
 # --------------------------------------------------
 
-# Note: The Flames database viewer will automatically:
-# 1. Read these schemas from GET /schema endpoint
-# 2. Use them for document validation when creating/editing
-# 3. Handle all database operations (CRUD) directly
-# 4. You don't need to create any database endpoints!
+class Item(BaseModel):
+    """
+    Master data barang (items)
+    Collection name: "item"
+    """
+    name: str = Field(..., description="Nama barang")
+    category: str = Field(..., description="Kategori barang")
+    condition: str = Field(..., description="Kondisi barang: new/used")
+    price: float = Field(..., ge=0, description="Harga barang")
+    description: Optional[str] = Field(None, description="Deskripsi barang")
+    image_url: Optional[str] = Field(None, description="URL gambar yang diunggah")
